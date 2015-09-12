@@ -1,1 +1,0 @@
-# sigtic_mobil
