@@ -1,127 +1,212 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8">
-	<title>SIGTICS</title>
-	
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-  
-	
-	<link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-	<script src="js/jquery.js"></script>
-	<script src="js/jquery.mobile-1.4.5.min.js"></script>
-	<script>
-		$( document ).on( "pagecreate", function() {
-			$( "body > [data-role='panel']" ).panel();
-			$( "body > [data-role='panel'] [data-role='listview']" ).listview();
-		});
-		$( document ).one( "pageshow", function() {
-			$( "body > [data-role='header']" ).toolbar();
-			$( "body > [data-role='header'] [data-role='navbar']" ).navbar();
-		});
-	</script>
- 
- <link rel="stylesheet" type="text/css" href="css/botones.css">
-	<style type="text/css">
+   <head>
 
-.lista li a
-{
-	font-weight: normal;
-	font-size: 14px;
-	background-color: #000;
+      <title>SIGTICS</title>
+      <meta charset="utf-8" />
+
+
+      <!-- Latest compiled and minified CSS -->
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+      <link type="text/css" href="css/demo.css" rel="stylesheet" />
+
+      <!-- Include jQuery.mmenu .css files -->
+      <link type="text/css" href="css/jquery.mmenu.all.css" rel="stylesheet" />
+
+      <!-- Include jQuery and the jQuery.mmenu .js files -->
+      <script type="text/javascript" src="js/jquery.js"></script>
+      <script type="text/javascript" src="js/jquery.mmenu.min.all.js"></script>
+
+      <!-- Fire the plugin onDocumentReady -->
+      <script type="text/javascript">
+         jQuery(document).ready(function( $ ) {
+            $("#menu").mmenu({
+               "extensions": [
+                  "effect-zoom-menu",
+                  "theme-white",
+                   "border-none"
+               ],
+               "counters": true,
+               "searchfield": {
+                  "placeholder": "Buscar",
+                  "noResults": "No hay resultado",
+                  "add": true
+               },
+               "navbars": [
+                  {
+                     "position": "top",
+                     "content": [
+                        "searchfield"
+                     ]
+                  },
+                  {
+                     "position": "top",
+                     "content": [
+                        "prev",
+                        "title",
+                        "close"
+                     ]
+                  },
+                  {
+                     "position": "bottom",
+                     "content": [
+                        "<a class='fa fa-envelope' href='#/'> SIGTICS</a>",
+                        "<a class='fa fa-twitter' href='#/'></a>",
+                        "<a class='fa fa-facebook' href='#/'></a>"
+                     ]
+                  }
+               ],
+               "sectionIndexer": true
+            });
+         });
+      </script>
+<style type="text/css">
+	span
+	{
+		margin-right: 20px;
+	}
+	li
+	{
+		color: #0082ad;
+		border-bottom:1px dotted;
 		
-}
-
+	}
 </style>
-</head>
-<body>
+   </head>
+   <body>
 
-	<div data-role="header" data-position="fixed" data-theme="b" id="navegacion" style="height:40px">
-		<h1>SIGTICS</h1>
+      <!-- The page -->
+      <div class="page">
+         <div class="header" style="background-color:#0082ad;">
+            <a href="#menu"></a>
+           <b id="ruta"> Inicio </b>
+         </div>
+         <div class="content" id="contenido">
+            
+ NOTICIAS INICIO
 
-		<a href="#outside" data-icon="bars" data-iconpos="notext">Menu</a>
-		<a href="#inside-a" data-icon="user" data-iconpos="notext">Buscar</a>
+         </div>
+      </div>
+
+      <!-- The menu -->
+      <nav id="menu">
+         <ul id="nav">
+            <li>
+
+            <a href="index.html" data-hash="#index"> 
+            <span class="glyphicon glyphicon-home" aria-hidden="true"></span> Inicio</a>
+            </li>
+
+            <li>
+            <a href="nosotros.html" data-hash="#nosotros" >
+            <span class="glyphicon glyphicon-indent-left" aria-hidden="true"></span>Nosotros</a>
+
+               <ul>
+                  <li>
+                  <a href="mision.html" data-hash="#mision">
+                  <span class="glyphicon glyphicon-heart-empty" aria-hidden="true"></span>Mision</a></li>
+                  <li>
+                  <a href="vision.html" data-hash="#vision">
+                  <span class="glyphicon glyphicon-globe" aria-hidden="true"></span>Vision</a></li>
+                  <li>
+                  <a href="nosotros.html" data-hash="#nosotros">
+                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>Nuestro grupo</a></li>
+               </ul>
+
+            </li>
+            <li>
+            <a href="contactenos.html" data-hash="#contactenos">
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>Contactenos</a></li>
+
+
+         </ul>
+
+      </nav>
+
+
+
+
+  <!-- scripts concatenated and minified via build script -->
+  <script src="js/plugins.js"></script>
+  <script src="js/script.js"></script>
+  <!-- end scripts -->
+  <script type="text/javascript">
+	(function($){
+
+//		alert("Ho");
+		var contenido = $('div#contenido'), url_anterior = '', extension = '.html', original = window.location;
+		$('ul#nav a').each(function(){ //Cambiamos los href por el contenido del atributo data-hash
+			$(this).attr('href', $(this).data('hash'));
+		});
+		$('ul#nav a').on('click', function(e){			
+			var hash = $(this).attr('href'); 
+			e.preventDefault();  
+			revisarURL(hash).done(function(){
+				window.location.href = hash; // Buen hash, cambiemoslo en la URL			
+			}).fail(function(){
+				window.location.href = '#error';
+			}).always(function(datos){
+				contenido.html(datos);
+			});
+			
+		});
 		
-	</div><!-- /header -->
-
-	<div data-role="page" id="a">
-
-		<div role="main" class="ui-content">
-
-
-
-<ul data-role="listview" data-inset="true" data-theme="a">
-
-   <li data-role="list-divider">Viernes, Noviembre 8, 2015 <span class="ui-li-count">2</span></li>
-
-<li><a href="index.html">
-    <h2>Noticia</h2>
-    <p><strong>Resumen</strong></p>
-    <p>Pequeña introduccion.</p>
-        <p class="ui-li-aside"><strong>6:24</strong>PM</p>
-    </a>
-</li>
-
-<li><a href="index.html">
-    <h2>Noticia</h2>
-    <p><strong>Resumen</strong></p>
-    <p>Pequeña introduccion.</p>
-        <p class="ui-li-aside"><strong>4:24</strong>PM</p>
-    </a>
-</li>
-
-    <li data-role="list-divider">Jueves, Noviembre 7, 2015 <span class="ui-li-count">1</span></li>
-  <li>
-    
-    <a href="index.html">
-   <h2>Noticia</h2>
-    <p><strong>Resumen</strong></p>
-    <p>Pequeña introduccion.</p>
-        <p class="ui-li-aside"><strong>1:24</strong>PM</p>
-    </a>
-</li>
-
-</ul>
-
-		</div><!-- /content -->
-
-	</div><!-- /page -->
-
-
-
-
-	<div data-role="panel" id="inside-a" data-position="right" data-display="overlay" data-theme="b" >
-	
-			<ul data-role="listview" class="lista">
-				<li data-icon="back"><a href="#" data-rel="close" style="font-weight:normal;">Cerrar</a></li>
-				<li data-icon="user"><a href="documento.html"> Datos Personales </a></li>
-				<li data-icon="mail"><a  href="correo.html"> Correo </a></li>
-				<li data-icon="phone"><a href="telefono.html"> Telefono </a></li>
-				<li data-icon="lock"><a href="clave.html"> Contraseña </a></li>
+		revisarURL(); // Si hay un hash en la URL (ej, copiamos y pegamos en una conversación) cargará la URL correcta.
+	setInterval(function(){
+			revisarURL().fail(function(){
+				window.location.href = '#error';
+			}).always(function(datos){
+				contenido.html(datos);
+			});
+		},250); // Revisamos cualquier cambio en el Hash cada 250 milisegundos */
+		
+		function revisarURL (hash){
+			var deferred = $.Deferred();
+			if (!hash) { // Esto ocurre	cuando se pulsa el botón de atrás o adelante en el navegador o al pasar una URL con hash
 				
-			</ul>
-		</div>
-
-	<div data-role="panel" id="outside" data-display="overlay" data-theme="b" >
-
-
-		<ul data-role="listview" data-filter="true" data-filter-placeholder="Buscar..."  class="lista" >
-			<li data-icon="back"><a href="#" data-rel="close" >Cerrar</a></li>
-			<li data-icon="home"> <a href="index.html"> Inicio  </a>
-			<li data-icon="info"> <a href="nosotros.html"> Nosotros  </a>
-			<li data-icon="eye"> <a href="vision.html"> Vision  </a>
-			<li data-icon="heart"> <a href="mision.html"> Mision  </a>
-			<li data-icon="mail"> <a href="contactenos.html"> Contactenos  </a>
-			<li data-icon="user"> <a href="#inside-a">  Mi Perfil  </a></li>
-			<li data-icon="action"> <a href="#inside-a">  Salir  </a></li>
+                //alert(hash);
+				hash = window.location.hash;
+			}
+			if (!hash) { // Esto puede pasar si es la primera URL - index.html en nuestro caso
+				var url = window.location.pathname; // Obtenemos la URL completa
+				var archivo = url.substring(url.lastIndexOf('/')+1); // Nos quedamos con el nombre del archivo (index.html)
+				hash = archivo.replace(extension,''); // Le quitamos la extensión para convertirlo en "hash"
+			}
+			if (hash !== url_anterior){ 
+				url_anterior = hash; 
+				cargarPagina(hash).done(
+					function(data){	
+						var html = $(data);
+						var filtrado = html.find('#contenido');
+						deferred.resolve(filtrado.html());
+						//$("#ruta").html(hash);
+					}
+				).fail(function(){ // La URL no existe					
+					deferred.reject('<p>La página no existe.</p>'); // Rechazamos nuestro deferred	
+				});
+			}
+			return deferred.promise(); // Devolvemos una promesa, no un deferred
+		}
+		function cargarPagina(hash){
+			url = hash.replace('#','');  //Quitamos la almohadilla
+            url2= url.charAt(0).toUpperCase() + url.slice(1); // convierto a mayuscula la 1 letra
+			if (url=="index") {$("#ruta").html("Inicio");} else {$("#ruta").html(url2);}
 			
-			</li>
-			
-		</ul>
 
-		<img src="img/logo2.png" style="width:90%;margin-top:30px">
-	</div>
-
-
-</body>
+			return $.ajax({
+				url: url + extension,
+				async: true,
+				dataType: "html"});			
+		}
+	})(jQuery);
+  </script>
+   </body>
 </html>
